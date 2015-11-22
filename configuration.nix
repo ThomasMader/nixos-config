@@ -60,6 +60,9 @@
     layout = "at";
     synaptics.enable = true;
     synaptics.twoFingerScroll = true;
+    synaptics.horizontalScroll = true;
+    synaptics.vertTwoFingerScroll = true;
+    synaptics.horizTwoFingerScroll = true;
 
     # Doesn't work yet in my virtual box image.
     # displayManager.gdm.enable = true;
