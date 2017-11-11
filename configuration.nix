@@ -10,17 +10,21 @@
       ./hardware-configuration.nix
     ];
 
-  # Use the gummiboot efi boot loader.
-  #boot.kernelPackages = pkgs.linuxPackages_4_2;
   boot.kernelPackages = pkgs.linuxPackages;
   boot.kernelModules = [ "msr" "coretemp" "applesmc" ];
-  #boot.extraModprobeConfig = ''
-#	options snd slots=snd-hda-intel
-#	option snd_hda_intel enable=0,1
-  #'';
-  #boot.blacklistedKernelModules = [ "snd_pcsp" ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.systemd-boot.editor = false;
+  boot.loader.timeout = 0;
+
+  nix.extraOptions = ''
+      gc-keep-outputs = true
+      gc-keep-derivations = true
+  '';
+
+  nix.gc.automatic = true;
+  nix.gc.dates = "daily";
+  nix.gc.options = "--delete-older-than 180d";
 
   # Disable USB-based wakeup
   # see: https://wiki.archlinux.org/index.php/Power_management/Suspend_and_hibernate
@@ -48,7 +52,7 @@
 
   fileSystems."/data" = {
     device = "/dev/disk/by-label/data";
-    fsType = "ntfs";
+    fsType = "exfat";
   };
 
   # Select internationalisation properties.
@@ -65,34 +69,21 @@
 	pulseaudio.enable = true;
   };
 
-  #environment.variables = {
-    #BROWSER = "chromium-browser";
-  #};
-
   nixpkgs.config = {
 
     allowUnfree = true;
-
-    #chromium = {
-      #enablePepperFlash = true;
-      #enablePepperPDF = true;
-      #enableWideVine = true;
-    #};
   };
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
-    nix-repl git vimHugeX google-chrome pciutils usbutils gparted vlc efibootmgr kdiff3 curl audacious
+    nix-repl git vimHugeX google-chrome pciutils usbutils gparted vlc efibootmgr kdiff3 curl audacious exfat ntfs3g hdparm mplayer gptfdisk
   ];
 
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
 
   # Enable the X11 windowing system.
   services.xserver = {
@@ -105,8 +96,6 @@
     synaptics.vertTwoFingerScroll = true;
     synaptics.horizTwoFingerScroll = true;
 
-    # Doesn't work yet in my virtual box image.
-    # displayManager.gdm.enable = true;
     desktopManager.gnome3.enable = true;
 
     displayManager.auto = {
@@ -128,7 +117,8 @@
   };
 
   # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "16.03";
+  system.stateVersion = "17.09";
+  nix.useSandbox = true;
 
 }
 
