@@ -10,6 +10,11 @@
       ./hardware-configuration.nix
     ];
 
+  boot.initrd.kernelModules = [ 
+    "nls-cp437" # /boot
+    "nls-iso8859-1" # /boot
+    "vfat" # /boot
+  ];
   boot.kernelPackages = pkgs.linuxPackages;
   boot.kernelModules = [ "msr" "coretemp" "applesmc" ];
   boot.loader.systemd-boot.enable = true;
@@ -50,10 +55,10 @@
      iptables -I INPUT -p udp -m udp -s 192.168.1.6 --dport 32768:61000 -j ACCEPT 
     '';
 
-  fileSystems."/data" = {
-    device = "/dev/disk/by-label/data";
-    fsType = "exfat";
-  };
+  #fileSystems."/data" = {
+  #  device = "/dev/disk/by-label/data";
+  #  fsType = "exfat";
+  #};
 
   # Select internationalisation properties.
    i18n = {
@@ -119,6 +124,7 @@
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "17.09";
   nix.useSandbox = true;
+  nix.buildCores = 0;
 
 }
 
