@@ -98,7 +98,6 @@
     uid = 1001;
     createHome = true;
     home = "/home/thomad";
-    password = "thomad";
     useDefaultShell = true;
     group = "users";
     extraGroups = [ "wheel" "networkmanager" "vboxsf" ];
