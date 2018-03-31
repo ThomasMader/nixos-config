@@ -5,22 +5,8 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
-
-  boot.initrd.kernelModules = [ 
-    "nls-cp437" # /boot
-    "nls-iso8859-1" # /boot
-    "vfat" # /boot
-  ];
-  boot.kernelPackages = pkgs.linuxPackages;
-  boot.kernelModules = [ "msr" "coretemp" "applesmc" ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.systemd-boot.editor = false;
-  boot.loader.timeout = 0;
 
   nix.extraOptions = ''
       gc-keep-outputs = true
@@ -39,21 +25,19 @@
       fi
   '';
 
-  networking.hostName = "mini";
   networking.nameservers = [ "192.168.0.1" "8.8.8.8" "8.8.4.4" ];
   networking.networkmanager.enable = lib.mkForce true;
   networking.wireless.enable = lib.mkForce false;
 
   networking.firewall = {
     allowPing = true;
+    # Chromecast rules to let the UDP unicast packets pass to detect the devices.
+    extraCommands =
+      ''
+       iptables -I INPUT -p udp -m udp -s 192.168.1.7 --dport 32768:61000 -j ACCEPT 
+       iptables -I INPUT -p udp -m udp -s 192.168.1.6 --dport 32768:61000 -j ACCEPT 
+      '';
   };
-
-  # Chromecast rules to let the UDP unicast packets pass to detect the devices.
-  networking.firewall.extraCommands =
-    ''
-     iptables -I INPUT -p udp -m udp -s 192.168.1.7 --dport 32768:61000 -j ACCEPT 
-     iptables -I INPUT -p udp -m udp -s 192.168.1.6 --dport 32768:61000 -j ACCEPT 
-    '';
 
   #fileSystems."/data" = {
   #  device = "/dev/disk/by-label/data";
@@ -75,7 +59,6 @@
   };
 
   nixpkgs.config = {
-
     allowUnfree = true;
   };
 
@@ -121,8 +104,6 @@
     extraGroups = [ "wheel" "networkmanager" "vboxsf" ];
   };
 
-  # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "17.09";
   nix.useSandbox = true;
   nix.buildCores = 0;
 

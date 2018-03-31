@@ -9,8 +9,30 @@
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "sd_mod" "sdhci_pci" ];
-  boot.kernelModules = [ "kvm-intel" "wl" ];
+  boot.kernelModules = [ "kvm-intel" "wl" "msr" "coretemp" "applesmc" ];
   boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
+
+  boot.initrd.kernelModules = [ 
+    "nls-cp437" # /boot
+    "nls-iso8859-1" # /boot
+    "vfat" # /boot
+  ];
+  boot.kernelPackages = pkgs.linuxPackages;
+  boot.loader.systemd-boot.editor = false;
+  boot.loader.timeout = 0;
+
+  networking.hostName = "mini";
+  networking.nameservers = [ "192.168.0.1" "8.8.8.8" "8.8.4.4" ];
+  networking.networkmanager.enable = lib.mkForce true;
+  networking.wireless.enable = lib.mkForce false;
+
+  # Chromecast rules to let the UDP unicast packets pass to detect the devices.
+  networking.firewall.extraCommands =
+    ''
+     iptables -I INPUT -p udp -m udp -s 192.168.1.7 --dport 32768:61000 -j ACCEPT 
+     iptables -I INPUT -p udp -m udp -s 192.168.1.6 --dport 32768:61000 -j ACCEPT 
+    '';
+
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/f434f98b-3198-48e5-bafa-e326108f47fa";
