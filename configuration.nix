@@ -34,8 +34,7 @@
     # Chromecast rules to let the UDP unicast packets pass to detect the devices.
     extraCommands =
       ''
-       iptables -I INPUT -p udp -m udp -s 192.168.1.7 --dport 32768:61000 -j ACCEPT 
-       iptables -I INPUT -p udp -m udp -s 192.168.1.6 --dport 32768:61000 -j ACCEPT 
+       iptables -I INPUT -p udp -m udp -s 192.168.0.0/16 --match multiport --dports 1900,5353 -j ACCEPT 
       '';
   };
 
@@ -83,13 +82,14 @@
     synaptics.horizontalScroll = true;
     synaptics.vertTwoFingerScroll = true;
     synaptics.horizTwoFingerScroll = true;
+    synaptics.minSpeed = "2.3";
+    synaptics.maxSpeed = "5";
+    synaptics.additionalOptions = ''
+      # Disable left edge of touchpad to ignore unwanted palm touches
+      Option "AreaLeftEdge" "500"
+    '';
 
     desktopManager.gnome3.enable = true;
-
-    displayManager.auto = {
-      enable = true;
-      user = "thomad";
-    };
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
