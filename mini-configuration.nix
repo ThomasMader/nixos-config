@@ -11,7 +11,6 @@
   ];
   boot.kernelPackages = pkgs.linuxPackages;
   boot.loader.systemd-boot.editor = false;
-  boot.loader.timeout = 0;
 
   networking.hostName = "mini";
 
