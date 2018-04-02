@@ -76,18 +76,6 @@
   services.xserver = {
     enable = true;
     layout = "at";
-    libinput.enable = false;
-    synaptics.enable = true;
-    synaptics.twoFingerScroll = true;
-    synaptics.horizontalScroll = true;
-    synaptics.vertTwoFingerScroll = true;
-    synaptics.horizTwoFingerScroll = true;
-    synaptics.minSpeed = "2.3";
-    synaptics.maxSpeed = "5";
-    synaptics.additionalOptions = ''
-      # Disable left edge of touchpad to ignore unwanted palm touches
-      Option "AreaLeftEdge" "500"
-    '';
 
     desktopManager.gnome3.enable = true;
   };
