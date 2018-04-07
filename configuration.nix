@@ -53,6 +53,8 @@
   # Set your time zone.
   time.timeZone = "Europe/Vienna";
 
+  programs.bash.enableCompletion = true;
+
   hardware = {
 	pulseaudio.enable = true;
   };
@@ -78,6 +80,9 @@
     layout = "at";
 
     desktopManager.gnome3.enable = true;
+
+    displayManager.gdm.enable = true;
+    displayManager.gdm.wayland = false;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
