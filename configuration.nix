@@ -70,7 +70,6 @@
   ];
 
   services = {
-    openssh.enable = true;
     logind.lidSwitch = "lock";
 
     xserver = {
