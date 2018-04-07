@@ -69,20 +69,19 @@
     nix-repl git vimHugeX google-chrome pciutils usbutils gparted vlc efibootmgr kdiff3 curl audacious exfat ntfs3g hdparm mplayer gptfdisk dmd
   ];
 
-  # List services that you want to enable:
+  services = {
+    openssh.enable = true;
+    logind.lidSwitch = "lock";
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+    xserver = {
+      enable = true;
+      layout = "at";
 
-  # Enable the X11 windowing system.
-  services.xserver = {
-    enable = true;
-    layout = "at";
+      desktopManager.gnome3.enable = true;
 
-    desktopManager.gnome3.enable = true;
-
-    displayManager.gdm.enable = true;
-    displayManager.gdm.wayland = false;
+      displayManager.gdm.enable = true;
+      displayManager.gdm.wayland = false;
+    };
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
