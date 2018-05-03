@@ -25,7 +25,6 @@
       fi
   '';
 
-  networking.nameservers = [ "192.168.0.1" "8.8.8.8" "8.8.4.4" ];
   networking.networkmanager.enable = lib.mkForce true;
   networking.wireless.enable = lib.mkForce false;
 
