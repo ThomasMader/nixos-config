@@ -14,7 +14,7 @@
 
   networking.hostName = "mini";
 
-  services.xserver.displayManager.auto = {
+  services.xserver.displayManager.gdm.autoLogin = {
     enable = true;
     user = "thomad";
   };
