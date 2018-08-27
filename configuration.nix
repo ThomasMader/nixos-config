@@ -55,7 +55,8 @@
   programs.bash.enableCompletion = true;
 
   hardware = {
-	pulseaudio.enable = true;
+    pulseaudio.enable = true;
+    opengl.enable = true;
   };
 
   nixpkgs.config = {
@@ -64,9 +65,14 @@
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-  environment.systemPackages = with pkgs; [
-    nix-repl git vimHugeX google-chrome pciutils usbutils gparted vlc efibootmgr kdiff3 curl audacious exfat ntfs3g hdparm mplayer gptfdisk dmd
-  ];
+  environment.systemPackages = let
+    # See https://beyermatthias.de/blog/2015/11/25/how-to-setup-neovim-on-nixos/ for an explanation
+    vimPackages = import ./vim/vimPackages.nix pkgs;
+  in
+    vimPackages ++ 
+    (with pkgs; [
+      binutils nix-repl git google-chrome pciutils usbutils gparted vlc efibootmgr kdiff3 curl audacious exfat ntfs3g hdparm mplayer gptfdisk ldc dmd dtools dub glxinfo wol rdesktop wget
+  ]);
 
   services = {
     logind.lidSwitch = "lock";
