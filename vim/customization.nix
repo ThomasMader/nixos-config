@@ -11,12 +11,13 @@ in
 
     pluginDictionaries = [
       # from pkgs.vimPlugins
-      { name = "ctrlp"; }
+      { name = "fzfWrapper"; }
+      { name = "fzf-vim"; }
       { name = "vim-airline"; }
       { name = "Solarized"; }
 
       # from our own plugin package set
-      { name = "easybuffer"; }
+      { name = "vim-smooth-scroll"; }
     ];
   };
 }

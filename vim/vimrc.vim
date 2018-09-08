@@ -94,37 +94,25 @@ autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4
 noremap! <S-CR> <Esc>
 noremap <S-CR> <Esc>
 
-noremap <silent> <M-k> :call smooth_scroll#up(&scroll, 0, 2)<CR>
-noremap <silent> <M-j> :call smooth_scroll#down(&scroll, 0, 2)<CR>
-
-noremap <silent> <C-l> :EasyBuffer<CR>
+noremap <silent> <C-i> :call smooth_scroll#up(&scroll, 0, 2)<CR>
+noremap <silent> <C-u> :call smooth_scroll#down(&scroll, 0, 2)<CR>
 
 "map <C-K> :pyf C:\Program Files (x86)\LLVM\tools\clang-format\clang-format.py<CR>
 "imap <C-K> <ESC>:pyf C:\Program Files (x86)\LLVM 3.4.svn\tools\clang-format\clang-format.py<CR>i
 
-let g:ctrlp_map = '<C-k>'
-let g:ctrlp_max_files = 0
-let g:ctrlp_by_filename = 1
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others']
-let g:ctrlp_use_caching = 0
-let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+nnoremap <C-k> :Files<CR>
+nnoremap <C-l> :Buffers<CR>
 
-" The Silver Searcher
-if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
 
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-endif
-
-" Searching using Ctrl+P
-map <Leader>o :CtrlPMixed<CR>
-
-let g:ycm_autoclose_preview_window_after_completion = 1
+" Likewise, Files command with preview window
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 " Setup tags option to actually use the generated ctags
 "set tags=$REPOSITORY_BASE\source\cpp\Libraries.ctags,$REPOSITORY_BASE\source\cpp\Components.ctags,$REPOSITORY_BASE\source\cpp\Applications.ctags,$REPOSITORY_BASE\source\cpp\Corba.ctags

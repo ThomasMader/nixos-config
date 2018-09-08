@@ -53,6 +53,14 @@
   time.timeZone = "Europe/Vienna";
 
   programs.bash.enableCompletion = true;
+  programs.bash.interactiveShellInit = ''
+    export FZF_DEFAULT_COMMAND='rg --files'
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    if command -v fzf-share >/dev/null; then
+      source "$(fzf-share)/key-bindings.bash"
+    fi
+    bind -x '"\C-k": vim $(fzf);'
+  '';
 
   hardware = {
     pulseaudio.enable = true;
@@ -71,7 +79,7 @@
   in
     vimPackages ++ 
     (with pkgs; [
-      binutils nix-repl git google-chrome pciutils usbutils gparted vlc efibootmgr kdiff3 curl audacious exfat ntfs3g hdparm mplayer gptfdisk ldc dmd dtools dub glxinfo wol rdesktop wget
+      binutils nix-repl git google-chrome pciutils usbutils gparted vlc efibootmgr kdiff3 curl audacious exfat ntfs3g hdparm mplayer gptfdisk ldc dmd dtools dub glxinfo wol rdesktop wget ripgrep fzf
   ]);
 
   services = {
