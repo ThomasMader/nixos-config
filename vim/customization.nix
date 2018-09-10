@@ -15,6 +15,7 @@ in
       { name = "fzf-vim"; }
       { name = "vim-airline"; }
       { name = "Solarized"; }
+      { name = "vim-addon-nix"; ft_regex = "^nix\$"; }
 
       # from our own plugin package set
       { name = "vim-smooth-scroll"; }
