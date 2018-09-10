@@ -62,7 +62,7 @@ let g:airline_symbols.whitespace = ''
 
 let g:solarized_italic = 0
 colorscheme solarized
-set background=dark
+set background=light
 syntax on
 set langmenu=en_US.UTF-8
 set encoding=utf-8
