@@ -71,6 +71,10 @@
     allowUnfree = true;
   };
 
+  environment.interactiveShellInit = ''
+    alias tmadrid_rdesktop='rdesktop -z -P -x l -g 1920x1080 -k de tmadrid'
+  '';
+
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = let
