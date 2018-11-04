@@ -83,7 +83,7 @@
   in
     vimPackages ++ 
     (with pkgs; [
-      binutils nix-repl git google-chrome pciutils usbutils gparted vlc efibootmgr kdiff3 curl audacious exfat ntfs3g hdparm mplayer gptfdisk ldc dmd dtools dub glxinfo wol rdesktop wget ripgrep fzf
+      binutils nix-repl git google-chrome pciutils usbutils gparted vlc efibootmgr kdiff3 curl audacious exfat ntfs3g hdparm mplayer gptfdisk ldc dmd dtools dub glxinfo wol rdesktop wget ripgrep fzf signal-desktop
   ]);
 
   services = {
