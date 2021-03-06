@@ -43,11 +43,12 @@
   #};
 
   # Select internationalisation properties.
-   i18n = {
-     consoleFont = "Lat2-Terminus16";
-     consoleKeyMap = "de";
-     defaultLocale = "en_US.UTF-8";
-   };
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+  };
+
+  console.font = "Lat2-Terminus16";
+  console.keyMap = "de";
 
   # Set your time zone.
   time.timeZone = "Europe/Vienna";
@@ -83,7 +84,7 @@
   in
     vimPackages ++ 
     (with pkgs; [
-      binutils git google-chrome pciutils usbutils gparted vlc efibootmgr kdiff3 curl audacious exfat ntfs3g hdparm mplayer gptfdisk ldc dmd dtools dub glxinfo wol rdesktop wget ripgrep fzf signal-desktop
+      binutils git google-chrome pciutils usbutils gparted vlc efibootmgr kdiff3 curl audacious exfat ntfs3g hdparm mplayer gptfdisk ldc dmd dtools dub glxinfo wol rdesktop wget ripgrep fzf signal-desktop gimp
   ]);
 
   services = {
