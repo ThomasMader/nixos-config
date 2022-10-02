@@ -94,7 +94,7 @@
       enable = true;
       layout = "at";
 
-      desktopManager.gnome3.enable = true;
+      desktopManager.gnome.enable = true;
 
       displayManager.gdm.enable = true;
       displayManager.gdm.wayland = false;
