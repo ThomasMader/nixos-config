@@ -1,9 +1,13 @@
-{ pkgs, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   customization = {
     vimrcConfig = (import ./customization.nix { pkgs = pkgs; });
   } // { name = "vim"; };
+
+  nixpkgs.config.permittedInsecurePackages = [
+    "python-2.7.18.6"
+  ];
 
   custom_vim = pkgs.vim_configurable.customize customization;
 

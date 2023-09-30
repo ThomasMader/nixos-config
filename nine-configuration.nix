@@ -1,6 +1,12 @@
 { config, lib, pkgs, ... }:
 
 {
+  imports =
+    [
+      ./desktop.nix
+      /etc/nixos/hardware-configuration.nix
+    ];
+
   networking.hostName = "nine";
 
   # This value determines the NixOS release with which your system is to be

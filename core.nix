@@ -78,27 +78,24 @@
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-  environment.systemPackages = let
+
+ # TODO This vim setup doesn't work anymore as of NixOS 23.05, need to find another solution.
+ # environment.systemPackages = let
     # See https://beyermatthias.de/blog/2015/11/25/how-to-setup-neovim-on-nixos/ for an explanation
-    vimPackages = import ./vim/vimPackages.nix pkgs;
-  in
-    vimPackages ++ 
-    (with pkgs; [
+    #vimPackages = import ./vim/vimPackages.nix pkgs;
+  #in
+    #vimPackages ++ (
+  #  (with pkgs; [
+  #    binutils git google-chrome pciutils usbutils gparted vlc efibootmgr kdiff3 curl audacious exfat ntfs3g hdparm mplayer gptfdisk ldc dmd dtools dub glxinfo wol rdesktop wget ripgrep fzf signal-desktop gimp
+  #]);
+
+  environment.systemPackages =
+    with pkgs; [
       binutils git google-chrome pciutils usbutils gparted vlc efibootmgr kdiff3 curl audacious exfat ntfs3g hdparm mplayer gptfdisk ldc dmd dtools dub glxinfo wol rdesktop wget ripgrep fzf signal-desktop gimp
-  ]);
+  ];
 
   services = {
     logind.lidSwitch = "lock";
-
-    xserver = {
-      enable = true;
-      layout = "at";
-
-      desktopManager.gnome.enable = true;
-
-      displayManager.gdm.enable = true;
-      displayManager.gdm.wayland = false;
-    };
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -112,8 +109,8 @@
     extraGroups = [ "wheel" "networkmanager" "vboxsf" ];
   };
 
-  nix.useSandbox = true;
-  nix.buildCores = 0;
+  nix.settings.sandbox = true;
+  nix.settings.cores = 0;
 
 }
 

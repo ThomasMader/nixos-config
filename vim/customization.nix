@@ -6,7 +6,7 @@ let
 in
 {
   customRC = vimrc;
-  vam = {
+  packages = {
     knownPlugins = pkgs.vimPlugins // plugins;
 
     pluginDictionaries = [

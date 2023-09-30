@@ -1,6 +1,12 @@
 { config, lib, pkgs, ... }:
 
 {
+  imports =
+    [
+      ./desktop.nix
+      /etc/nixos/hardware-configuration.nix
+    ];
+
   boot.kernelModules = [ "kvm-intel" "wl" "msr" "coretemp" "applesmc" ];
   boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
 
