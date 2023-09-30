@@ -3,6 +3,7 @@
 {
   imports =
     [
+      ./non-wsl.nix
       ./desktop.nix
       /etc/nixos/hardware-configuration.nix
     ];

@@ -5,9 +5,6 @@
 { config, lib, pkgs, ... }:
 
 {
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
   nix.extraOptions = ''
       gc-keep-outputs = true
       gc-keep-derivations = true
@@ -91,22 +88,11 @@
 
   environment.systemPackages =
     with pkgs; [
-      binutils git gh google-chrome pciutils usbutils gparted vlc efibootmgr kdiff3 curl audacious exfat ntfs3g hdparm mplayer gptfdisk glxinfo wol rdesktop wget ripgrep fzf signal-desktop gimp
+      binutils vim git gh google-chrome pciutils usbutils gparted vlc efibootmgr kdiff3 curl audacious exfat ntfs3g hdparm mplayer gptfdisk glxinfo wol rdesktop wget ripgrep fzf signal-desktop gimp
   ];
 
   services = {
     logind.lidSwitch = "lock";
-  };
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.extraUsers.thomad = {
-    isNormalUser = true;
-    uid = 1001;
-    createHome = true;
-    home = "/home/thomad";
-    useDefaultShell = true;
-    group = "users";
-    extraGroups = [ "wheel" "networkmanager" "vboxsf" ];
   };
 
   nix.settings.sandbox = true;
