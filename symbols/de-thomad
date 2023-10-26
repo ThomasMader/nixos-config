@@ -1,0 +1,16 @@
+xkb_symbols "de-thomad"
+{
+    include "pc+at+us:2+inet(evdev)+eurosign(e)"
+
+    name[Group1] = "German (Austria, thomad)";
+
+    key.type[Group1] = "FOUR_LEVEL";
+    key <AD03> { [      e,      E,      braceleft,      NoSymbol ] };
+    key <AD04> { [      r,      R,      braceright,     NoSymbol ] };
+    key <AC03> { [      d,      D,      parenleft,      NoSymbol ] };
+    key <AC04> { [      f,      F,      parenright,     NoSymbol ] };
+    key <AC05> { [      g,      G,      slash,          NoSymbol ] };
+    key <AB03> { [      c,      C,      bracketleft,    NoSymbol ] };
+    key <AB04> { [      v,      V,      bracketright,   NoSymbol ] };
+    key <AB05> { [      b,      B,      backslash,      NoSymbol ] };
+};

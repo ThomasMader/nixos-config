@@ -10,14 +10,30 @@
       ./core.nix
     ];
 
+
+  services.gnome.tracker-miners.enable = false;
+  
   services.xserver = {
     enable = true;
-    layout = "at";
+
+    extraLayouts.de-thomad = {
+      description = "DE thomad";
+      languages = [ "de" ];
+      symbolsFile = /configuration/symbols/de-thomad;
+    };
+
+    layout = "de-thomad";
 
     desktopManager.gnome.enable = true;
 
     displayManager.gdm.enable = true;
     displayManager.gdm.wayland = false;
   };
+
+  # Load custom keyboard layout on boot/resume
+  services.xserver.displayManager.sessionCommands = "${pkgs.xorg.xkbcomp}/bin/xkbcomp de-thomad $DISPLAY";
+
+  # Configure the console keymap from the xserver keyboard settings
+  console.useXkbConfig = true;
 }
 

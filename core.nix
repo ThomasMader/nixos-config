@@ -45,7 +45,6 @@
   };
 
   console.font = "Lat2-Terminus16";
-  console.keyMap = "de";
 
   # Set your time zone.
   time.timeZone = "Europe/Vienna";
@@ -88,7 +87,7 @@
 
   environment.systemPackages =
     with pkgs; [
-      binutils vim git gh google-chrome pciutils usbutils gparted vlc efibootmgr kdiff3 curl audacious exfat ntfs3g hdparm mplayer gptfdisk glxinfo wol rdesktop wget ripgrep fzf signal-desktop gimp tmux neovim neovide
+      binutils vim git gh google-chrome pciutils usbutils gparted vlc efibootmgr kdiff3 curl audacious exfat ntfs3g hdparm mplayer gptfdisk glxinfo wol rdesktop wget ripgrep fzf signal-desktop gimp tmux neovim neovide xorg.xkbcomp
   ];
 
   services = {
