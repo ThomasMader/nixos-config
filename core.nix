@@ -87,11 +87,6 @@
     vimAlias = true;
   };
 
-  programs.chromium.extensions =
-  [
-    "egpjdkipkomnmjhjmdamaniclmdlobbo" # firenvim
-  ];
-
   services = {
     logind.lidSwitch = "lock";
   };
