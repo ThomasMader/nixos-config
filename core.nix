@@ -75,19 +75,21 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
 
- # TODO This vim setup doesn't work anymore as of NixOS 23.05, need to find another solution.
- # environment.systemPackages = let
-    # See https://beyermatthias.de/blog/2015/11/25/how-to-setup-neovim-on-nixos/ for an explanation
-    #vimPackages = import ./vim/vimPackages.nix pkgs;
-  #in
-    #vimPackages ++ (
-  #  (with pkgs; [
-  #    binutils git gh google-chrome pciutils usbutils gparted vlc efibootmgr kdiff3 curl audacious exfat ntfs3g hdparm mplayer gptfdisk glxinfo wol rdesktop wget ripgrep fzf signal-desktop gimp
-  #]);
-
   environment.systemPackages =
     with pkgs; [
-      binutils vim git gh google-chrome pciutils usbutils gparted vlc efibootmgr kdiff3 curl audacious exfat ntfs3g hdparm mplayer gptfdisk glxinfo wol rdesktop wget ripgrep fzf signal-desktop gimp tmux neovim neovide xorg.xkbcomp
+      binutils vim git gh google-chrome pciutils usbutils gparted vlc efibootmgr kdiff3 curl audacious exfat ntfs3g hdparm mplayer gptfdisk glxinfo wol rdesktop wget ripgrep fzf signal-desktop gimp tmux xorg.xkbcomp
+  ];
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+  };
+
+  programs.chromium.extensions =
+  [
+    "egpjdkipkomnmjhjmdamaniclmdlobbo" # firenvim
   ];
 
   services = {
