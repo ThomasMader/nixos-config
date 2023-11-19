@@ -77,7 +77,7 @@
 
   environment.systemPackages =
     with pkgs; [
-      binutils vim git gh google-chrome pciutils usbutils gparted vlc efibootmgr kdiff3 curl audacious exfat ntfs3g hdparm mplayer gptfdisk glxinfo wol rdesktop wget ripgrep fzf signal-desktop gimp tmux xorg.xkbcomp clang
+      binutils vim git gh google-chrome pciutils usbutils gparted vlc efibootmgr kdiff3 curl audacious exfat ntfs3g hdparm mplayer gptfdisk glxinfo wol rdesktop wget ripgrep fzf signal-desktop gimp tmux xorg.xkbcomp clang python3Full
   ];
 
   programs.neovim = {
