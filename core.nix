@@ -6,6 +6,7 @@
 
 {
   nix.extraOptions = ''
+      experimental-features = nix-command flakes
       gc-keep-outputs = true
       gc-keep-derivations = true
   '';
@@ -77,7 +78,8 @@
 
   environment.systemPackages =
     with pkgs; [
-      binutils vim git gh google-chrome pciutils usbutils gparted vlc efibootmgr kdiff3 curl audacious exfat ntfs3g hdparm mplayer gptfdisk glxinfo wol rdesktop wget ripgrep fzf signal-desktop gimp tmux xorg.xkbcomp clang python3Full
+      binutils vim git gh google-chrome pciutils usbutils gparted vlc efibootmgr kdiff3 curl audacious exfat ntfs3g hdparm mplayer gptfdisk glxinfo wol rdesktop wget ripgrep fzf signal-desktop gimp tmux xorg.xkbcomp clang unzip nodejs
+      (python3.withPackages(ps: with ps; [ pip ]))
   ];
 
   programs.neovim = {
