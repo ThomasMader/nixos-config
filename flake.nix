@@ -9,7 +9,7 @@
 
   outputs = { self, nixpkgs, NixOS-WSL }: {
     nixosConfigurations = {
-      nixos = nixpkgs.lib.nixosSystem {
+      five = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [ 
           { nix.registry.nixpkgs.flake = nixpkgs; }

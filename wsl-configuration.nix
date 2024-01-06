@@ -12,9 +12,11 @@
     ./core.nix
   ];
 
-  networking.hostName = "nixos";
+  networking.hostName = "five";
   wsl.enable = true;
-  wsl.defaultUser = "nixos";
+  wsl.defaultUser = "thomad";
+  wsl.nativeSystemd = true;
+  users.users.thomad.isNormalUser = true;
   
 
   # This value determines the NixOS release from which the default
