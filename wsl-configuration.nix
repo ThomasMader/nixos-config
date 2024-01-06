@@ -9,8 +9,6 @@
 
 {
   imports = [
-    # include NixOS-WSL modules
-    <nixos-wsl/modules>
     ./core.nix
   ];
 
