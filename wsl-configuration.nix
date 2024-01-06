@@ -14,6 +14,7 @@
     ./core.nix
   ];
 
+  networking.hostName = "nixos";
   wsl.enable = true;
   wsl.defaultUser = "nixos";
   
