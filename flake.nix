@@ -9,6 +9,10 @@
         system = "x86_64-linux";
         modules = [ ./wsl-configuration.nix ];
       };
+      nine = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [ ./nine-configuration.nix ];
+      };
     };
 
   };
