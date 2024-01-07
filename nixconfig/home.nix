@@ -53,7 +53,7 @@
     # Make use of mkOutOfStoreSymlink to rapidly change settings by being able to directly changing the configuration because it's not a nix store symlink but instead links to the files in the repo directly.
     # Only works with absolute paths though.
     #".config/nvim".source = config.lib.file.mkOutOfStoreSymlink /home/thomad/nixos-config/dotfiles/nvim;
-    #".config/nvim".source = ../nvim;
+    ".config/nvim".source = ../dotfiles/nvim;
   };
 
   # Home Manager can also manage your environment variables through
