@@ -3,8 +3,8 @@
 {
   imports =
     [
-      ./non-wsl.nix
-      ./desktop.nix
+      ../non-wsl.nix
+      ../desktop.nix
       ./nine-hardware-configuration.nix
     ];
 

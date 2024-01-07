@@ -9,7 +9,7 @@
 
 {
   imports = [
-    ./core.nix
+    ../core.nix
   ];
 
   networking.hostName = "five";

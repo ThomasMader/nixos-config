@@ -19,7 +19,7 @@
     extraLayouts.de-thomad = {
       description = "DE thomad";
       languages = [ "de" ];
-      symbolsFile = /configuration/symbols/de-thomad;
+      symbolsFile = ./symbols/de-thomad;
     };
 
     layout = "de-thomad";
