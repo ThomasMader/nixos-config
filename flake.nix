@@ -26,7 +26,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.thomad = import ./dotfiles/home-manager/home.nix;
+            home-manager.users.thomad = import ./nixconfig/home.nix;
           }
 
           NixOS-WSL.nixosModules.wsl
@@ -41,7 +41,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.thomad = import ./dotfiles/home-manager/home.nix;
+            home-manager.users.thomad = import ./nixconfig/home.nix;
           }
         ];
       };
