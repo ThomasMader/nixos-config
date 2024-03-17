@@ -9,3 +9,12 @@ if (!(Test-Path $nvimPath)) {
 else {
     Write-Host "'$nvimPath' already exists."
 }
+
+$weztermPath = ${env:USERPROFILE} + "\.config\wezterm"
+if (!(Test-Path $weztermPath)) {
+    Write-Host "Creating link at: '$weztermPath'"
+    New-Item -ItemType SymbolicLink -Path $weztermPath -Target .\wezterm
+}
+else {
+    Write-Host "'$weztermPath' already exists."
+}

@@ -54,6 +54,7 @@
     # Only works with absolute paths though.
     #".config/nvim".source = config.lib.file.mkOutOfStoreSymlink /home/thomad/nixos-config/dotfiles/nvim;
     ".config/nvim".source = ../dotfiles/nvim;
+    ".config/wezterm".source = ../dotfiles/wezterm;
   };
 
   # Home Manager can also manage your environment variables through
