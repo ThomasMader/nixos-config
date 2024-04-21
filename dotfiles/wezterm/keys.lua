@@ -3,8 +3,6 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 local M = {}
 
---M.mod = wezterm.target_triple:find("windows") and "SHIFT|CTRL" or "SHIFT|SUPER"
--- Let's try to use this modifier on all platforms for now.
 M.mod = "SHIFT|CTRL"
 
 M.smart_split = wezterm.action_callback(function(window, pane)
