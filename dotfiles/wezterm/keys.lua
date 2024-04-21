@@ -3,7 +3,9 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 local M = {}
 
-M.mod = wezterm.target_triple:find("windows") and "SHIFT|CTRL" or "SHIFT|SUPER"
+--M.mod = wezterm.target_triple:find("windows") and "SHIFT|CTRL" or "SHIFT|SUPER"
+-- Let's try to use this modifier on all platforms for now.
+M.mod = "SHIFT|CTRL"
 
 M.smart_split = wezterm.action_callback(function(window, pane)
   local dim = pane:get_dimensions()
@@ -17,6 +19,115 @@ end)
 ---@param config Config
 function M.setup(config)
   config.disable_default_key_bindings = true
+
+  config.key_tables = {
+    copy_mode = {
+      -- default copy_mode mappings
+      { key = 'Tab', mods = 'NONE', action = act.CopyMode 'MoveForwardWord' },
+      { key = 'Tab', mods = 'SHIFT', action = act.CopyMode 'MoveBackwardWord' },
+      { key = 'Enter', mods = 'NONE', action = act.CopyMode 'MoveToStartOfNextLine' },
+      { key = 'Escape', mods = 'NONE', action = act.CopyMode 'Close' },
+      { key = 'Space', mods = 'NONE', action = act.CopyMode{ SetSelectionMode =
+ 'Cell' } },
+      { key = '$', mods = 'NONE', action = act.CopyMode 'MoveToEndOfLineContent' },
+      { key = '$', mods = 'SHIFT', action = act.CopyMode 'MoveToEndOfLineContent' },
+      { key = ',', mods = 'NONE', action = act.CopyMode 'JumpReverse' },
+      { key = '0', mods = 'NONE', action = act.CopyMode 'MoveToStartOfLine' },
+      { key = ';', mods = 'NONE', action = act.CopyMode 'JumpAgain' },
+      { key = 'F', mods = 'NONE', action = act.CopyMode{ JumpBackward = { prev_char = false } } },
+      { key = 'F', mods = 'SHIFT', action = act.CopyMode{ JumpBackward = { prev_char = false } } },
+      { key = 'G', mods = 'NONE', action = act.CopyMode 'MoveToScrollbackBottom' },
+      { key = 'G', mods = 'SHIFT', action = act.CopyMode 'MoveToScrollbackBottom' },
+      { key = 'H', mods = 'NONE', action = act.CopyMode 'MoveToViewportTop' },
+      { key = 'H', mods = 'SHIFT', action = act.CopyMode 'MoveToViewportTop' },
+      { key = 'L', mods = 'NONE', action = act.CopyMode 'MoveToViewportBottom' },
+      { key = 'L', mods = 'SHIFT', action = act.CopyMode 'MoveToViewportBottom'
+},
+      { key = 'M', mods = 'NONE', action = act.CopyMode 'MoveToViewportMiddle' },
+      { key = 'M', mods = 'SHIFT', action = act.CopyMode 'MoveToViewportMiddle'
+},
+      { key = 'O', mods = 'NONE', action = act.CopyMode 'MoveToSelectionOtherEndHoriz' },
+      { key = 'O', mods = 'SHIFT', action = act.CopyMode 'MoveToSelectionOtherEndHoriz' },
+      { key = 'T', mods = 'NONE', action = act.CopyMode{ JumpBackward = { prev_char = true } } },
+      { key = 'T', mods = 'SHIFT', action = act.CopyMode{ JumpBackward = { prev_char = true } } },
+      { key = 'V', mods = 'NONE', action = act.CopyMode{ SetSelectionMode =  'Line' } },
+      { key = 'V', mods = 'SHIFT', action = act.CopyMode{ SetSelectionMode =  'Line' } },
+      { key = '^', mods = 'NONE', action = act.CopyMode 'MoveToStartOfLineContent' },
+      { key = '^', mods = 'SHIFT', action = act.CopyMode 'MoveToStartOfLineContent' },
+      { key = 'b', mods = 'NONE', action = act.CopyMode 'MoveBackwardWord' },
+      { key = 'b', mods = 'ALT', action = act.CopyMode 'MoveBackwardWord' },
+      { key = 'b', mods = 'CTRL', action = act.CopyMode 'PageUp' },
+      { key = 'c', mods = 'CTRL', action = act.CopyMode 'Close' },
+      { key = 'd', mods = 'CTRL', action = act.CopyMode{ MoveByPage = (0.5) } },
+      { key = 'e', mods = 'NONE', action = act.CopyMode 'MoveForwardWordEnd' },
+      { key = 'f', mods = 'NONE', action = act.CopyMode{ JumpForward = { prev_char = false } } },
+      { key = 'f', mods = 'ALT', action = act.CopyMode 'MoveForwardWord' },
+      { key = 'f', mods = 'CTRL', action = act.CopyMode 'PageDown' },
+      { key = 'g', mods = 'NONE', action = act.CopyMode 'MoveToScrollbackTop' },
+      { key = 'g', mods = 'CTRL', action = act.CopyMode 'Close' },
+      { key = 'h', mods = 'NONE', action = act.CopyMode 'MoveLeft' },
+      { key = 'j', mods = 'NONE', action = act.CopyMode 'MoveDown' },
+      { key = 'k', mods = 'NONE', action = act.CopyMode 'MoveUp' },
+      { key = 'l', mods = 'NONE', action = act.CopyMode 'MoveRight' },
+      { key = 'm', mods = 'ALT', action = act.CopyMode 'MoveToStartOfLineContent' },
+      { key = 'o', mods = 'NONE', action = act.CopyMode 'MoveToSelectionOtherEnd' },
+      { key = 'q', mods = 'NONE', action = act.CopyMode 'Close' },
+      { key = 't', mods = 'NONE', action = act.CopyMode{ JumpForward = { prev_char = true } } },
+      { key = 'u', mods = 'CTRL', action = act.CopyMode{ MoveByPage = (-0.5) } },
+      { key = 'v', mods = 'NONE', action = act.CopyMode{ SetSelectionMode =  'Cell' } },
+      { key = 'v', mods = 'CTRL', action = act.CopyMode{ SetSelectionMode =  'Block' } },
+      { key = 'w', mods = 'NONE', action = act.CopyMode 'MoveForwardWord' },
+      { key = 'y', mods = 'NONE', action = act.Multiple{ { CopyTo =  'ClipboardAndPrimarySelection' }, { CopyMode =  'Close' } } },
+      { key = 'PageUp', mods = 'NONE', action = act.CopyMode 'PageUp' },
+      { key = 'PageDown', mods = 'NONE', action = act.CopyMode 'PageDown' },
+      { key = 'End', mods = 'NONE', action = act.CopyMode 'MoveToEndOfLineContent' },
+      { key = 'Home', mods = 'NONE', action = act.CopyMode 'MoveToStartOfLine' },
+      { key = 'LeftArrow', mods = 'NONE', action = act.CopyMode 'MoveLeft' },
+      { key = 'LeftArrow', mods = 'ALT', action = act.CopyMode 'MoveBackwardWord' },
+      { key = 'RightArrow', mods = 'NONE', action = act.CopyMode 'MoveRight' },
+      { key = 'RightArrow', mods = 'ALT', action = act.CopyMode 'MoveForwardWord' },
+      { key = 'UpArrow', mods = 'NONE', action = act.CopyMode 'MoveUp' },
+      { key = 'DownArrow', mods = 'NONE', action = act.CopyMode 'MoveDown' },
+
+      -- custom vim like copy_mode mappings
+      { key="Escape", mods='NONE', action=act.Multiple{act.CopyMode'Close',act.CopyMode'ClearPattern'}},
+      { key = 'y', mods = 'NONE',
+        action = act.Multiple {
+          { CopyTo =  'ClipboardAndPrimarySelection' },
+          act.CopyMode 'ClearPattern',
+          { CopyMode =  'Close' }
+        }
+      },
+      {key="u", mods="CTRL",  action=act.CopyMode("ClearSelectionMode")},
+      -- Enter search mode to edit the pattern.
+      -- When the search pattern is an empty string the existing pattern is preserved
+      {key="/", mods="SHIFT", action=wezterm.action{Search={CaseSensitiveString=""}}},
+      -- navigate any search mode results
+      {key="n", mods="NONE", action=wezterm.action{CopyMode="NextMatch"}},
+      {key="N", mods="SHIFT", action=wezterm.action{CopyMode="PriorMatch"}},
+    },
+
+    search_mode = {
+      -- default search_mode mappings
+      { key = 'Enter', mods = 'NONE', action = act.CopyMode 'PriorMatch' },
+      { key = 'Escape', mods = 'NONE', action = act.CopyMode 'Close' },
+      { key = 'n', mods = 'CTRL', action = act.CopyMode 'NextMatch' },
+      { key = 'p', mods = 'CTRL', action = act.CopyMode 'PriorMatch' },
+      { key = 'r', mods = 'CTRL', action = act.CopyMode 'CycleMatchType' },
+      { key = 'u', mods = 'CTRL', action = act.CopyMode 'ClearPattern' },
+      { key = 'PageUp', mods = 'NONE', action = act.CopyMode 'PriorMatchPage' },
+      { key = 'PageDown', mods = 'NONE', action = act.CopyMode 'NextMatchPage' },
+      { key = 'UpArrow', mods = 'NONE', action = act.CopyMode 'PriorMatch' },
+      { key = 'DownArrow', mods = 'NONE', action = act.CopyMode 'NextMatch' },
+
+      -- custom vim like search_mode mappings
+      {key="Escape",mods='NONE',action=act.Multiple{act.CopyMode'Close',act.CopyMode'ClearPattern'}},
+      -- Go back to copy mode when pressing enter, so that we can use unmodified keys like "n"
+      -- to navigate search results without conflicting with typing into the search area.
+      {key="Enter", mods="NONE", action="ActivateCopyMode"},
+    },
+  }
+
   config.keys = {
     -- Scrollback
     { mods = M.mod, key = "k", action = act.ScrollByPage(-0.5) },
@@ -25,11 +136,12 @@ function M.setup(config)
     { mods = M.mod, key = "t", action = act.SpawnTab("CurrentPaneDomain") },
     -- Splits
     { mods = M.mod, key = "Enter", action = M.smart_split },
-    { mods = M.mod, key = "|", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-    { mods = M.mod, key = "_", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+    { mods = M.mod, key = "RightArrow", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+    { mods = M.mod, key = "DownArrow", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+    { mods = M.mod, key = 'w', action = wezterm.action.CloseCurrentPane { confirm = true }, },
     -- Move Tabs
-    { mods = M.mod, key = ">", action = act.MoveTabRelative(1) },
-    { mods = M.mod, key = "<", action = act.MoveTabRelative(-1) },
+    { mods = "SHIFT|CTRL|ALT", key = "RightArrow", action = act.MoveTabRelative(1) },
+    { mods = "SHIFT|CTRL|ALT", key = "LeftArrow", action = act.MoveTabRelative(-1) },
     -- Acivate Tabs
     { mods = M.mod, key = "l", action = act({ ActivateTabRelative = 1 }) },
     { mods = M.mod, key = "h", action = act({ ActivateTabRelative = -1 }) },
@@ -45,8 +157,8 @@ function M.setup(config)
     { mods = M.mod, key = "M", action = act.TogglePaneZoomState },
     { mods = M.mod, key = "p", action = act.ActivateCommandPalette },
     { mods = M.mod, key = "d", action = act.ShowDebugOverlay },
-    M.split_nav("resize", "CTRL", "LeftArrow", "Right"),
-    M.split_nav("resize", "CTRL", "RightArrow", "Left"),
+    M.split_nav("resize", "CTRL", "LeftArrow", "Left"),
+    M.split_nav("resize", "CTRL", "RightArrow", "Right"),
     M.split_nav("resize", "CTRL", "UpArrow", "Up"),
     M.split_nav("resize", "CTRL", "DownArrow", "Down"),
     M.split_nav("move", "CTRL", "h", "Left"),

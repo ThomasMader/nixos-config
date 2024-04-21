@@ -25,10 +25,12 @@ config.color_scheme = scheme_for_appearance(get_appearance())
 
 -- Taken from https://github.com/folke/dot/tree/master/config/wezterm
 require("tabs").setup(config)
---require("keys").setup(config)
+-- TODO Next step is to try out https://github.com/mrjones2014/smart-splits.nvim and set up the keys to also work with nvim.
+require("keys").setup(config)
 
-config.leader = { key = 'F11', mods = '' }
+--config.leader = { key = 'F11', mods = '' }
 
+--[[
 config.keys = {
   {
     key = '|',
@@ -36,6 +38,7 @@ config.keys = {
     action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' },
   },
 }
+]]--
 
 config.scrollback_lines = 10000
 
