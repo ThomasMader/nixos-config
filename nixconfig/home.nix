@@ -52,7 +52,10 @@
 
     # Make use of mkOutOfStoreSymlink to rapidly change settings by being able to directly changing the configuration because it's not a nix store symlink but instead links to the files in the repo directly.
     # Only works with absolute paths though.
+    # Doesn't work currently anymore: https://github.com/nix-community/home-manager/issues/4692
     #".config/nvim".source = config.lib.file.mkOutOfStoreSymlink /home/thomad/nixos-config/dotfiles/nvim;
+    #".config/wezterm".source = config.lib.file.mkOutOfStoreSymlink /home/thomad/nixos-config/dotfiles/wezterm;
+
     ".config/nvim".source = ../dotfiles/nvim;
     ".config/wezterm".source = ../dotfiles/wezterm;
   };
