@@ -76,6 +76,8 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
 
+  virtualisation.docker.enable = true;
+
   environment.systemPackages =
     with pkgs; [
       binutils vim git gh google-chrome pciutils usbutils gparted vlc efibootmgr kdiff3 curl audacious exfat ntfs3g hdparm mplayer gptfdisk glxinfo wol rdesktop wget ripgrep fzf signal-desktop gimp xorg.xkbcomp clang unzip nodejs xclip wezterm

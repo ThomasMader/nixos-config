@@ -16,7 +16,7 @@
     home = "/home/thomad";
     useDefaultShell = true;
     group = "users";
-    extraGroups = [ "wheel" "networkmanager" "vboxsf" ];
+    extraGroups = [ "wheel" "networkmanager" "vboxsf" "docker" ];
   };
 }
 

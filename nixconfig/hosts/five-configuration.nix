@@ -16,7 +16,10 @@
   wsl.enable = true;
   wsl.defaultUser = "thomad";
   wsl.nativeSystemd = true;
-  users.users.thomad.isNormalUser = true;
+  users.users.thomad = {
+    isNormalUser = true;
+    extraGroups = [ "docker" ];
+  };
   
 
   # This value determines the NixOS release from which the default
