@@ -1,0 +1,124 @@
+#|
+Shortcut to exit Kanata: Ctrl-Space-Esc
+
+Microsoft Windows related issues:
+    - Need to use winIOv2 Kanata variant/executable to make this layout work
+    - Kanata doesn't work in elevated Windows
+    - It's not possible to define excluded device names like for Linux (Don't want to use the Interception variant)
+|#
+
+#|
+(defcfg
+  linux-dev-names-exclude (
+    ;; USB connected Glove80
+    "MoErgo Glove80 Left Keyboard"
+
+    ;; Bluetooth connected Glove80
+    "Glove80 Keyboard"
+  )
+
+  windows-altgr cancel-lctl-press
+
+  log-layer-changes no
+  process-unmapped-keys yes
+)
+|#
+
+(defalias
+  ;; shifted german keys
+  ! S-1
+  ˝ S-2  ;; unicode 02DD ˝ look-a-like is used because @" is no valid alias, to be displayed correctly
+         ;; in console requires a font that can - e.g. cascadia
+  §	S-3 ;; §
+  $	S-4
+  %	S-5
+  &	S-6
+  /	S-7
+  =	S-0
+  ? S--
+  * S-]
+  ' S-\
+  ; S-,
+  : S-.
+  _ S--
+  ° S-grv
+  > S-<
+  < <   ;; not really needed but having @< and @> looks consistent
+
+  ;; change dead keys in normal keys
+  grave (macro S-= spc );; `
+  ;; Not used because the acute is more useful as a deadkey currently
+  ;;acute (macro = spc )  ;; ´
+  ^ (macro grv spc )    ;; ^ = \ - shifting @^ will produce an incorrect space now
+
+  ;; AltGr German keys
+  ~ RA-]
+  ẞ RA-S--
+  \ RA--
+  | RA-<
+  } RA-0
+  { RA-7
+  ] RA-9
+  [ RA-8
+  € RA-e
+  @ RA-q
+  ² RA-2
+  ³ RA-3
+  µ RA-m
+)
+
+(defvar
+  ;; tap-timeout
+  tt 200
+  ;; hold-timeout
+  ht 200
+)
+
+(defalias
+    symbol (layer-toggle symbol)
+    number (layer-toggle number)
+
+    ctl_a (tap-hold $tt $ht a lctl)
+    sft_s (tap-hold $tt $ht s lsft)
+    alt_d (tap-hold $tt $ht d lalt)
+    num_f (tap-hold $tt $ht f @number)
+    ;;Meta is the Windows key but currently not used in the homerow
+    ;;met_f (tap-hold $tt $ht f lmet)
+
+    alt_k (tap-hold $tt $ht k lalt)
+    sft_l (tap-hold $tt $ht l rsft)
+    ctl_; (tap-hold $tt $ht ; rctl)
+)
+
+(defsrc
+  grv       1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab       q    w    e    r    t    y    u    i    o    p    [    ]
+  caps      a    s    d    f    g    h    j    k    l    ;    '         ret
+  lsft  \   z    x    c    v    b    n    m    ,    .    /              rsft
+  lctl    lmet   lalt           spc            ralt
+)
+
+(deflayer base
+  @^       _       _       _       _       _  _  _  _       _       _       _  _  _
+  _        _       _       _       _       _  _  _  _       _       _       _  _
+  esc      @ctl_a  @sft_s  @alt_d  @num_f  g  h  j  @alt_k  @sft_l  @ctl_;  _  _
+  _    _   _       _       _       _       _  _  _  _       _       _       _
+  _      _       _           _                @symbol
+)
+
+(deflayer symbol
+  _       _    _    _    _    _    _    _    _    _    _    _    _    _
+  _       @^   @$   @{   @}   @€   @§   @&   @'   \    @°   _    _
+  esc     @<   @>   S-8  S-9  @/   @~   @!   S-2  @*   @=   =    _
+  _  _    @|   @%   @[   @]   @\   @µ   @?   @grave    ]    @@   _ 
+  _      _       _           _                _
+)
+
+(deflayer number
+  _         _    _    _    _    _    _    _    _    _    _    _    _    _
+  _         _    _    _    _    _    _    7    8    9    _    _    _
+  _         _    _    _    _    _    _    4    5    6    _    _    _
+  _   _     _    _    _    _    _    0    1    2    3    _    _
+  _      _       _           _            _
+)
+

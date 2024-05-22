@@ -80,7 +80,7 @@
 
   environment.systemPackages =
     with pkgs; [
-      binutils vim git gh google-chrome pciutils usbutils gparted vlc efibootmgr kdiff3 curl audacious exfat ntfs3g hdparm mplayer gptfdisk glxinfo wol rdesktop wget ripgrep fzf signal-desktop gimp xorg.xkbcomp clang unzip nodejs xclip wezterm haskellPackages.kmonad
+      binutils vim git gh google-chrome pciutils usbutils gparted vlc efibootmgr kdiff3 curl audacious exfat ntfs3g hdparm mplayer gptfdisk glxinfo wol rdesktop wget ripgrep fzf signal-desktop gimp xorg.xkbcomp clang unzip nodejs xclip wezterm
       (python3.withPackages(ps: with ps; [ pip ]))
   ];
 

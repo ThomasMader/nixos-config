@@ -16,7 +16,40 @@
     home = "/home/thomad";
     useDefaultShell = true;
     group = "users";
-    extraGroups = [ "wheel" "networkmanager" "vboxsf" "docker" ];
+    extraGroups = [ 
+      "wheel"
+      "networkmanager" 
+      "vboxsf" 
+      "docker" 
+    ];
+  };
+
+  environment.systemPackages =
+    with pkgs; [
+      kanata
+  ];
+
+  services.kanata = {
+    enable = true;
+    # TODO load complete config from file instead
+    keyboards = {
+      "default".extraDefCfg = ''
+        linux-dev-names-exclude (
+          ;; USB connected Glove80
+          "MoErgo Glove80 Left Keyboard"
+
+          ;; Bluetooth connected Glove80
+          "Glove80 Keyboard"
+        )
+
+        windows-altgr cancel-lctl-press
+
+        log-layer-changes no
+        process-unmapped-keys yes
+      '';
+      "default".config =
+      (builtins.readFile ../dotfiles/kanata/kanata.kbd);
+    };
   };
 }
 
