@@ -7,7 +7,6 @@ Microsoft Windows related issues:
     - It's not possible to define excluded device names like for Linux (Don't want to use the Interception variant)
 |#
 
-#|
 (defcfg
   linux-dev-names-exclude (
     ;; USB connected Glove80
@@ -22,7 +21,6 @@ Microsoft Windows related issues:
   log-layer-changes no
   process-unmapped-keys yes
 )
-|#
 
 (defalias
   ;; shifted german keys
