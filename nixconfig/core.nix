@@ -7,13 +7,13 @@
 {
   nix.extraOptions = ''
       experimental-features = nix-command flakes
-      gc-keep-outputs = true
-      gc-keep-derivations = true
+      keep-outputs = true
+      keep-derivations = true
   '';
 
   nix.gc.automatic = true;
   nix.gc.dates = "daily";
-  nix.gc.options = "--delete-older-than 180d";
+  nix.gc.options = "--max-freed 5G --delete-older-than 14d";
 
   # Disable USB-based wakeup
   # see: https://wiki.archlinux.org/index.php/Power_management/Suspend_and_hibernate
