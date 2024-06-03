@@ -13,7 +13,7 @@
 
   nix.gc.automatic = true;
   nix.gc.dates = "daily";
-  nix.gc.options = "--max-freed 5G --delete-older-than 14d";
+  nix.gc.options = "--delete-older-than 2d";
 
   # Disable USB-based wakeup
   # see: https://wiki.archlinux.org/index.php/Power_management/Suspend_and_hibernate
