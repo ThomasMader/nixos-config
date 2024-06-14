@@ -70,13 +70,14 @@
   };
 
   environment.interactiveShellInit = ''
-    alias tmadrid_rdesktop='rdesktop -z -P -x l -g 1920x1080 -k de tmadrid'
+    alias mojo_bash='podman run --cap-add SYS_PTRACE -it --rm -p 8888:8888 --net host -v $PWD:$PWD modular/mojo-v-20241506-0022 bash'
+    alias mojo_build_container='cd ~/devel/mojo/examples/docker/ && bash build-image.sh --use-podman --mojo-version'
   '';
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
 
-  virtualisation.docker.enable = true;
+  virtualisation.podman.enable = true;
 
   environment.systemPackages =
     with pkgs; [
