@@ -1,6 +1,2 @@
-vim.cmd.language('en_US.UTF-8')
-
-require("config.autocmds")
-require("config.keymaps")
-require("config.options")
+-- bootstrap lazy.nvim, LazyVim and your plugins
 require("config.lazy")
