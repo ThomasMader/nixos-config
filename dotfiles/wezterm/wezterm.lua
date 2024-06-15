@@ -15,13 +15,14 @@ end
 
 function scheme_for_appearance(appearance)
   if appearance:find 'Dark' then
-    return 'Tokyo Night'
+    return 'tokyonight_night'
   else
-    return 'Tokyo Night Day'
+    return 'tokyonight_day'
   end
 end
 
-config.color_scheme = scheme_for_appearance(get_appearance())
+-- Disable auto colorscheme changes for now
+--config.color_scheme = scheme_for_appearance(get_appearance())
 
 -- Taken from https://github.com/folke/dot/tree/master/config/wezterm
 require("tabs").setup(config)
