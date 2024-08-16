@@ -1,10 +1,10 @@
 {
-  description = "A very basic flake";
+  description = "NixOS configurations";
 
   inputs = {
     nixpkgs.url = github:NixOS/nixpkgs/nixos-24.05;
     NixOS-WSL = {
-      url = "github:nix-community/NixOS-WSL";
+      url = "github:nix-community/NixOS-WSL/2405.5.4";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
@@ -20,7 +20,7 @@
         modules = [ 
           { nix.registry.nixpkgs.flake = nixpkgs; }
 
-          ./nixconfig/hosts/five-configuration.nix 
+          ./nixconfig/hosts/five-configuration.nix
 
           home-manager.nixosModules.home-manager
           {

@@ -81,16 +81,12 @@
 
   environment.systemPackages =
     with pkgs; [
-      binutils vim git gh google-chrome pciutils usbutils gparted vlc efibootmgr kdiff3 curl audacious exfat ntfs3g hdparm mplayer gptfdisk glxinfo wol rdesktop wget ripgrep fzf lazygit fd signal-desktop gimp xorg.xkbcomp clang unzip nodejs xclip wezterm
+      binutils git gh google-chrome pciutils usbutils gparted vlc efibootmgr
+      kdiff3 curl audacious exfat ntfs3g hdparm mplayer gptfdisk glxinfo wol
+      rdesktop wget ripgrep fzf lazygit fd signal-desktop gimp xorg.xkbcomp
+      clang unzip nodejs xclip wezterm
       (python3.withPackages(ps: with ps; [ pip ]))
   ];
-
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    viAlias = true;
-    vimAlias = true;
-  };
 
   services = {
     logind.lidSwitch = "lock";
