@@ -35,17 +35,23 @@
       '';
   };
 
-  #fileSystems."/data" = {
-  #  device = "/dev/disk/by-label/data";
-  #  fsType = "exfat";
-  #};
-
   # Select internationalisation properties.
-  i18n = {
-    defaultLocale = "en_US.UTF-8";
-  };
+  i18n.extraLocaleSettings = {
+    LANG = "en_US.UTF-8";
+    LC_MESSAGES = "en_US.UTF-8";
 
-  console.font = "Lat2-Terminus16";
+    LC_CTYPE = "de_AT.UTF-8";
+    LC_NUMERIC = "de_AT.UTF-8";
+    LC_TIME = "de_AT.UTF-8";
+    LC_COLLATE = "de_AT.UTF-8";
+    LC_MONETARY = "de_AT.UTF-8";
+    LC_PAPER = "de_AT.UTF-8";
+    LC_NAME = "de_AT.UTF-8";
+    LC_ADDRESS = "de_AT.UTF-8";
+    LC_TELEPHONE = "de_AT.UTF-8";
+    LC_MEASUREMENT = "de_AT.UTF-8";
+    LC_IDENTIFICATION = "de_AT.UTF-8";
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Vienna";
@@ -81,16 +87,14 @@
 
   environment.systemPackages =
     with pkgs; [
-      chromium gparted mplayer vlc kdiff3 signal-desktop gimp
-
-      nodejs unzip
-
       binutils git gh pciutils usbutils efibootmgr
       curl exfat ntfs3g hdparm gptfdisk glxinfo
       wget ripgrep fzf lazygit fd xclip htop
+
+      # needed for nvim plugin
+      nodejs
       clang
       (python3.withPackages(ps: with ps; [ pip ]))
-
       (lua5_1.withPackages(ps: with ps; [ luarocks ]))
   ];
 

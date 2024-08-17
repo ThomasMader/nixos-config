@@ -13,6 +13,11 @@
 
   services.gnome.tracker-miners.enable = false;
 
+  environment.systemPackages =
+    with pkgs; [
+      google-chrome gparted mplayer vlc kdiff3 signal-desktop gimp wezterm
+  ];
+
   services.xserver = {
     enable = true;
 
