@@ -2,13 +2,17 @@
   description = "NixOS configurations";
 
   inputs = {
-    nixpkgs.url = github:NixOS/nixpkgs/nixos-24.05;
+    # Using unstable for now because of issues with nvim
+    #nixpkgs.url = github:NixOS/nixpkgs/nixos-24.05;
+    nixpkgs.url = github:NixOS/nixpkgs/nixos-unstable;
     NixOS-WSL = {
       url = "github:nix-community/NixOS-WSL/2405.5.4";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-        url = "github:nix-community/home-manager/release-24.05";
+        # Using unstable for now because of issues with nvim
+        #url = "github:nix-community/home-manager/release-24.05";
+        url = "github:nix-community/home-manager/master";
         inputs.nixpkgs.follows = "nixpkgs";
     };
   };

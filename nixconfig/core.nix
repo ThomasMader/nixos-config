@@ -81,12 +81,26 @@
 
   environment.systemPackages =
     with pkgs; [
-      binutils git gh google-chrome pciutils usbutils gparted vlc efibootmgr
-      kdiff3 curl audacious exfat ntfs3g hdparm mplayer gptfdisk glxinfo wol
-      rdesktop wget ripgrep fzf lazygit fd signal-desktop gimp xorg.xkbcomp
-      clang unzip nodejs xclip wezterm
+      chromium gparted mplayer vlc kdiff3 signal-desktop gimp
+
+      nodejs unzip
+
+      binutils git gh pciutils usbutils efibootmgr
+      curl exfat ntfs3g hdparm gptfdisk glxinfo
+      wget ripgrep fzf lazygit fd xclip htop
+      clang
       (python3.withPackages(ps: with ps; [ pip ]))
+
+      (lua5_1.withPackages(ps: with ps; [ luarocks ]))
   ];
+
+  # Enable nix-ld to work around packages downloaded by mason to being able to
+  # not have to nixify the LazyVim configuration for now
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+    ];
+  };
 
   services = {
     logind.lidSwitch = "lock";
