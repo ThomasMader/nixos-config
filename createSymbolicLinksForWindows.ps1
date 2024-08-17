@@ -4,7 +4,7 @@
 $nvimPath = ${env:LOCALAPPDATA} + "\nvim"
 if (!(Test-Path $nvimPath)) {
     Write-Host "Creating link at: '$nvimPath'"
-    New-Item -ItemType SymbolicLink -Path $nvimPath -Target .\nvim
+    New-Item -ItemType SymbolicLink -Path $nvimPath -Target .\dotfiles\nvim
 }
 else {
     Write-Host "'$nvimPath' already exists."
@@ -13,7 +13,7 @@ else {
 $weztermPath = ${env:USERPROFILE} + "\.config\wezterm"
 if (!(Test-Path $weztermPath)) {
     Write-Host "Creating link at: '$weztermPath'"
-    New-Item -ItemType SymbolicLink -Path $weztermPath -Target .\wezterm
+    New-Item -ItemType SymbolicLink -Path $weztermPath -Target .\dotfiles\wezterm
 }
 else {
     Write-Host "'$weztermPath' already exists."
