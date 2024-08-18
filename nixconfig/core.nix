@@ -56,7 +56,7 @@
   # Set your time zone.
   time.timeZone = "Europe/Vienna";
 
-  programs.bash.enableCompletion = true;
+  programs.bash.completion.enable = true;
   programs.bash.interactiveShellInit = ''
     export FZF_DEFAULT_COMMAND='rg --files'
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -68,7 +68,7 @@
 
   hardware = {
     pulseaudio.enable = true;
-    opengl.enable = true;
+    graphics.enable = true;
   };
 
   nixpkgs.config = {

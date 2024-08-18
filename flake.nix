@@ -4,7 +4,7 @@
   inputs = {
     # Using unstable for now because of issues with nvim
     #nixpkgs.url = github:NixOS/nixpkgs/nixos-24.05;
-    nixpkgs.url = github:NixOS/nixpkgs/nixos-unstable;
+    nixpkgs.url = github:NixOS/nixpkgs/a58bc8ad779655e790115244571758e8de055e3d;
     NixOS-WSL = {
       url = "github:nix-community/NixOS-WSL/2405.5.4";
       inputs.nixpkgs.follows = "nixpkgs";
