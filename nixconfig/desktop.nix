@@ -18,15 +18,18 @@
       google-chrome gparted mplayer vlc kdiff3 signal-desktop gimp wezterm
   ];
 
-  services.xserver = {
-    enable = true;
-
-    xkb.layout = "de";
-
-    desktopManager.gnome.enable = true;
-    displayManager.gdm.enable = true;
-    displayManager.gdm.wayland = false;
+  services = {
     displayManager.autoLogin.user = "thomad";
+
+    xserver = {
+      enable = true;
+
+      xkb.layout = "de";
+
+      desktopManager.gnome.enable = true;
+      displayManager.gdm.enable = true;
+      displayManager.gdm.wayland = false;
+    };
   };  
 
   # Workaround for getting Gnome autologin work.
