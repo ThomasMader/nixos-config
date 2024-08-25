@@ -76,6 +76,13 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  programs.ssh.matchBlocks = {
+    "github.com" = {
+      user = "git";
+      identityFile = "home/thomad/.ssh/id_ed25519";
+    };
+  };
+
   programs.neovim = {
     enable = true;
     defaultEditor = true;
