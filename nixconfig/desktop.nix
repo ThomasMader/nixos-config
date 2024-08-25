@@ -26,7 +26,13 @@
     desktopManager.gnome.enable = true;
     displayManager.gdm.enable = true;
     displayManager.gdm.wayland = false;
+    displayManager.autoLogin.user = "thomad";
   };  
+
+  # Workaround for getting Gnome autologin work.
+  # https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
+  systemd.services."getty@tty1".enable = false;
+  systemd.services."autovt@tty1".enable = false;
 
   # Configure the console keymap from the xserver keyboard settings
   console.useXkbConfig = true;

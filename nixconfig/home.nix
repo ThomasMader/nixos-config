@@ -83,5 +83,11 @@
     vimAlias = true;
     vimdiffAlias = true;
   };
+
+  programs.git = {
+      enable = true;
+      userName = "Thomas Mader";
+      userEmail = "thomas.mader@gmail.com";
+  };
 }
 
