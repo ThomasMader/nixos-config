@@ -163,6 +163,7 @@ function M.setup(config)
     M.split_nav("move", "CTRL", "j", "Down"),
     M.split_nav("move", "CTRL", "k", "Up"),
     M.split_nav("move", "CTRL", "l", "Right"),
+    { mods = "NONE", key = "F11", action = wezterm.action.ToggleFullScreen },
   }
 end
 

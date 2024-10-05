@@ -1,7 +1,7 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
-config.color_scheme = "tokyonight_day"
+config.color_scheme = "tokyonight_night"
 config.use_fancy_tab_bar = true
 
 -- wezterm.gui is not available to the mux server, so take care to
