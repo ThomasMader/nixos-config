@@ -90,6 +90,7 @@
       binutils git gh pciutils usbutils efibootmgr
       curl exfat ntfs3g hdparm gptfdisk glxinfo
       wget ripgrep fzf lazygit fd xclip htop
+      fh
 
       # needed for nvim plugin
       nodejs

@@ -11,10 +11,9 @@
         url = "github:nix-community/home-manager/release-24.11";
         inputs.nixpkgs.follows = "nixpkgs";
     };
-    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/0.1";
   };
 
-  outputs = { self, nixpkgs, home-manager, NixOS-WSL, determinate }: {
+  outputs = { self, nixpkgs, home-manager, NixOS-WSL }: {
     nixosConfigurations = {
       five = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
