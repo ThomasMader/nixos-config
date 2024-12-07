@@ -2,26 +2,23 @@
   description = "NixOS configurations";
 
   inputs = {
-    # Using unstable for now because of issues with nvim
-    #nixpkgs.url = github:NixOS/nixpkgs/nixos-24.05;
-    nixpkgs.url = github:NixOS/nixpkgs/a58bc8ad779655e790115244571758e8de055e3d;
+    nixpkgs.url = github:NixOS/nixpkgs/nixos-24.11;
     NixOS-WSL = {
       url = "github:nix-community/NixOS-WSL/2405.5.4";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-        # Using unstable for now because of issues with nvim
-        #url = "github:nix-community/home-manager/release-24.05";
-        url = "github:nix-community/home-manager/master";
+        url = "github:nix-community/home-manager/release-24.11";
         inputs.nixpkgs.follows = "nixpkgs";
     };
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/0.1";
   };
 
-  outputs = { self, nixpkgs, home-manager, NixOS-WSL }: {
+  outputs = { self, nixpkgs, home-manager, NixOS-WSL, determinate }: {
     nixosConfigurations = {
       five = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ 
+        modules = [
           { nix.registry.nixpkgs.flake = nixpkgs; }
 
           ./nixconfig/hosts/five-configuration.nix
